@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//hehe
 public class Fruit : MonoBehaviour
 {
     public int scoreReward;
