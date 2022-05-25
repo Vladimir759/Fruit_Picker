@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//hello world
+
 public class FruitSpowner : MonoBehaviour
 {
     public List<GameObject> dropItems;
