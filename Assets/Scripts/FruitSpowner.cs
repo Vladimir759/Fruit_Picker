@@ -5,10 +5,18 @@ using UnityEngine;
 public class FruitSpowner : MonoBehaviour
 {
     public List<GameObject> dropItems;
-    public Queue<GameObject> reservedItems;
+    public List<GameObject> reservedItems;
+    private Queue<GameObject> fruitQueue;
+
     public float speed = 1f;
     public float chanceToChangeDirection = 0.1f;
     public float secondsBetweenDrops = 1f;
+
+    private void Awake()
+    {
+        fruitQueue = new Queue<GameObject>(reservedItems);
+    }
+
 
     private void Start()
     {
@@ -27,10 +35,11 @@ public class FruitSpowner : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
+    {      
         if (Random.value < chanceToChangeDirection)
         {
             speed *= -1;
+            Debug.Log("Direction Inverted");
         }
     }
 
@@ -43,8 +52,8 @@ public class FruitSpowner : MonoBehaviour
         Invoke("FruitDrop", secondsBetweenDrops);
     }
 
-    void NewAdd()
+    public void AddNewDropItem()
     {
-        dropItems.Add(reservedItems.Dequeue());
+        dropItems.Add(fruitQueue.Dequeue());
     }
 }
