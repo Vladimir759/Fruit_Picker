@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject infoUI;
     [SerializeField] private GameObject controlGroup;
     [SerializeField] private GameObject resultPanel;
-    [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject restartPanel;
+    [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject flySpowner;
     [SerializeField] private GameObject stage;
     [SerializeField] private GameObject fruitBox, basket;
@@ -27,9 +28,17 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        gameStage = 1;
         gameRunning = true;
     }
 
+    /*private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) && gameStage == 1)
+        {
+            PauseGame();
+        }
+    }*/
 
     public void DestroyAllDroppedObjects()
     {
@@ -52,7 +61,7 @@ public class GameManager : MonoBehaviour
         finalScore.text = scoreScript.currentScore.ToString();
         resultPanel.SetActive(true);
         yield return new WaitForSeconds(4);
-        restartButton.SetActive(true);
+        restartPanel.SetActive(true);
         //start particle System
         
     }
@@ -79,11 +88,13 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             gameRunning = !gameRunning;
+            settingsPanel.SetActive(true);
         }
         else
         {
             Time.timeScale = 1f;
             gameRunning = !gameRunning;
+            settingsPanel.SetActive(false);
         }
     }
 

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Basket : MonoBehaviour
 {
-    private float speed = 30f;
+    private float speed;
 
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.A) && transform.position.x > -18.1f)//для тестирования
+        /*if(Input.GetKey(KeyCode.A) && transform.position.x > -18.1f)//для тестирования
         {
             transform.position += Vector3.left * speed * Time.deltaTime;
  
@@ -18,9 +18,9 @@ public class Basket : MonoBehaviour
         else if(Input.GetKey(KeyCode.D) && transform.position.x < 18.1f)
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
-        }
+        }*/
 
-        //BasketMover();
+        BasketMover();
     }
 
     
@@ -50,16 +50,16 @@ public class Basket : MonoBehaviour
 
     public void RightButtonDown()
     {
-        //speed = 30;
+        speed = 30;
     }
 
     public void LeftButtonDown()
     {
-        //speed = -30f;
+        speed = -30f;
     }
 
     public void ButtonUp()
     {
-        //speed = 0f;       
+        speed = 0f;       
     }
 }
