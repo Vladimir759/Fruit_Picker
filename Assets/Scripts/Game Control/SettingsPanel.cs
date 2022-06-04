@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class SettingsPanel : MonoBehaviour
 {
-    public AudioMixerGroup _audioMixer;
-    public Toggle soundToggle;
-    public Slider musicSlider;
-    public Slider fxSlider;
+    [SerializeField] private AudioMixerGroup _audioMixer;
+    [SerializeField] private Toggle soundToggle;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider fxSlider;
 
     private void Start()
     {

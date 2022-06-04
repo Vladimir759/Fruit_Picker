@@ -7,11 +7,11 @@ public class ScoreScript : MonoBehaviour
 {
     public GameManager gameManager;
     public Basket basketScript;
-    public Text UImaxScore;
-    public Text UIcurrentScore;
-    public Text UItries;
+    [SerializeField] private Text UImaxScore;
+    [SerializeField] private Text UIcurrentScore;
+    [SerializeField] private Text UItries;
     private int scoreDefault = 100;
-    private int currentScore;
+    public int currentScore;
     private int maxScore;
     private int tries;
     public int nextDifficultScore;
@@ -73,8 +73,8 @@ public class ScoreScript : MonoBehaviour
             TriesUpdate();
             if(tries == 0)
             {
-                //gameManager.GameOver():
-                gameManager.StartGame();
+                gameManager.GameOver();
+                //gameManager.StartGame();
             }          
         }       
     }

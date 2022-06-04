@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FruitSpowner : MonoBehaviour
 {
-    public List<GameObject> dropItems;
-    public List<GameObject> reservedItems;
-    private Queue<GameObject> fruitQueue;
+    [SerializeField] private List<GameObject> dropItems;
+    [SerializeField] private List<GameObject> reservedItems;
+    private Queue<GameObject> itemsQueue;
 
     public float speed = 1f;
     public float chanceToChangeDirection = 0.1f;
@@ -14,7 +14,7 @@ public class FruitSpowner : MonoBehaviour
 
     private void Awake()
     {
-        fruitQueue = new Queue<GameObject>(reservedItems);
+        itemsQueue = new Queue<GameObject>(reservedItems);
     }
 
 
@@ -54,6 +54,6 @@ public class FruitSpowner : MonoBehaviour
 
     public void AddNewDropItem()
     {
-        dropItems.Add(fruitQueue.Dequeue());
+        dropItems.Add(itemsQueue.Dequeue());
     }
 }

@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class FlyObjectsSpowner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    [SerializeField] private GameObject flyPrefab;
+    [SerializeField] private Transform spawnPoint;
+    private bool objectExists;
+    [SerializeField] private float chanceToSpawnObject;
+
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        Debug.Log("COLLISION");
+        Destroy(collision.gameObject);
+        objectExists = !objectExists;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        if (objectExists) return;
+        if (Random.value < chanceToSpawnObject)
+        {
+            GameObject fly = Instantiate(flyPrefab, spawnPoint.position, transform.rotation);
+            objectExists = !objectExists;
+        }
     }
 }

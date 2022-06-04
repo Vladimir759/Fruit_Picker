@@ -5,38 +5,20 @@ using UnityEngine.UI;
 
 public class Basket : MonoBehaviour
 {
-    //public ScoreScript scoreScript;
-    public MeshRenderer _meshRender;
-    private const float _blinkDelay = 0.1f;
-    //private float _speed;
     private float speed = 30f;
 
-    
-
-    private void Start()
-    {       
-        _meshRender = GetComponent<MeshRenderer>();
-    }
 
     private void Update()
     {
         if(Input.GetKey(KeyCode.A) && transform.position.x > -18.1f)//для тестирования
         {
-            Vector3 pos = transform.position;
-            pos.x -= speed * Time.deltaTime;
-            transform.position = pos;
+            transform.position += Vector3.left * speed * Time.deltaTime;
+ 
         }
         else if(Input.GetKey(KeyCode.D) && transform.position.x < 18.1f)
         {
-            Vector3 pos = transform.position;
-            pos.x += speed * Time.deltaTime;
-            transform.position = pos;
+            transform.position += Vector3.right * speed * Time.deltaTime;
         }
-       
-        /*if (Input.GetKeyDown(KeyCode.E))//для тестирования
-        {
-            StartCoroutine(BasketBlink());
-        }*/
 
         //BasketMover();
     }
@@ -53,15 +35,7 @@ public class Basket : MonoBehaviour
         }
     }
      
-    public IEnumerator BasketBlink()
-    {       
-        for (int i = 0; i < 6; i++)
-        {
-            _meshRender.enabled = !_meshRender.enabled;
-            yield return new WaitForSeconds(_blinkDelay);
-            Debug.Log("Basket blink");
-        }
-    }
+    
 
     public void BasketMover()
     {
