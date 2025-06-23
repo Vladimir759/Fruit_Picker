@@ -5,21 +5,29 @@ using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour
 {
-    public GameManager gameManager;
-    public Basket basketScript;
+    private const int START_TRIES = 3;
+    private const int DEFAULT_NEXT_DIFFICULT_SCORE = 50;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameplayController gameplayController;
+    [SerializeField] private Basket basketScript;
     [SerializeField] private Text UImaxScore;
     [SerializeField] private Text UIcurrentScore;
     [SerializeField] private Text UItries;
     private int scoreDefault = 100;
-    public int currentScore;
+    private int currentScore;
     private int maxScore;
     private int tries;
-    public int nextDifficultScore;
-    
+    private int nextDifficultScore;
+
+    public int CurrentScore
+    {
+        get { return currentScore; }
+    }
+
     private void Awake()
     {
-        tries = 3;
-        nextDifficultScore = 50;
+        tries = START_TRIES;
+        nextDifficultScore = DEFAULT_NEXT_DIFFICULT_SCORE;
         if(PlayerPrefs.HasKey("Max Score"))
         {
             maxScore = PlayerPrefs.GetInt("Max Score");
@@ -36,15 +44,15 @@ public class ScoreScript : MonoBehaviour
     private void Start()
     {       
         UIcurrentScore.text = "0";
-        TriesUpdate();
+        UpdateTriesInfo();
     }
 
     public void AddScore(int scoreToAdd)
     {
         currentScore += scoreToAdd;
         if(currentScore >= nextDifficultScore)
-        {          
-            gameManager.IncreaseDifficultyLevel();
+        {
+            gameplayController.IncreaseDifficultyLevel();
         }
 
         if(currentScore > maxScore)
@@ -64,22 +72,26 @@ public class ScoreScript : MonoBehaviour
         if(isValueIncreased)
         {
             tries += 1;
-            TriesUpdate();
+            UpdateTriesInfo();
         }
         else
         {
             Debug.Log(tries);
             tries -= 1;
-            TriesUpdate();
+            UpdateTriesInfo();
             if(tries == 0)
             {
                 gameManager.GameOver();
-                //gameManager.StartGame();
             }          
         }       
     }
 
-    private void TriesUpdate()
+    public void UpdateNextDifficultScore(int newValue)
+    {
+        nextDifficultScore = Mathf.Abs(newValue);
+    }
+
+    private void UpdateTriesInfo()
     {
         UItries.text = tries.ToString();
     }
