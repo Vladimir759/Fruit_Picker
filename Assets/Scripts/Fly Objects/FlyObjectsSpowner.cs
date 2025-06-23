@@ -8,7 +8,7 @@ public class FlyObjectsSpowner : MonoBehaviour
     [SerializeField] private GameObject flyPrefab;
     [SerializeField] private Transform spawnPoint;
     private bool objectExists;
-    [SerializeField] private float chanceToSpawnObject;
+    [SerializeField] private float spawnRandomFactor;
 
     
     private void OnCollisionEnter(Collision collision)
@@ -21,7 +21,7 @@ public class FlyObjectsSpowner : MonoBehaviour
     private void FixedUpdate()
     {
         if (objectExists) return;
-        if (Random.value < chanceToSpawnObject)
+        if (Random.Range(0,2) < spawnRandomFactor)
         {
             GameObject fly = Instantiate(flyPrefab, spawnPoint.position, transform.rotation);
             objectExists = !objectExists;
