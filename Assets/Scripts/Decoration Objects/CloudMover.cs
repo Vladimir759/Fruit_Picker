@@ -14,5 +14,4 @@ public class CloudMover : MonoBehaviour
         }
         transform.position += Vector3.right * speed * Time.deltaTime;
     }
-
 }
