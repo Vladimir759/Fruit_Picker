@@ -2,35 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fruit : DropableObjectTemplate
+public class Fruit : DropableObject
 {
-    
+    [SerializeField] private bool isBig;
     public AudioClip fruitCollected;
     public int scoreReward;
     //public int hitPower;
 
-
     public override void ObjectCollected()
     {
-        ScoreScript scoreScipt = Camera.main.GetComponent<ScoreScript>();
-        scoreScipt.AddScore(scoreReward);
+        GameplayController gameplayController = Camera.main.GetComponent<GameplayController>();
+        gameplayController.PlayerCollectedFruit(scoreReward, gameObject);
         audioSource.clip = fruitCollected;
         audioSource.Play();
-        Destroy(gameObject, 0.1f);
     }
 
     public override void ObjectSkipped()
     {
-        GameManager gameManager = Camera.main.GetComponent<GameManager>();
+        GameplayController gameplayController = Camera.main.GetComponent<GameplayController>();
         audioSource.clip = destroySound;
         audioSource.Play();
-        //задержка
-        gameManager.DestroyAllDroppedObjects();
+        gameplayController.PlayerMissedFruit(gameObject);
     }
-
-
-
-
-
-
 }
