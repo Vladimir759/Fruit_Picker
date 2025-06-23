@@ -17,19 +17,4 @@ public class Fly : FlyingObjectTemplate
             audioSource.pitch = 0.8f;
         }      
     }
-
-    public override void ChangeAnimation()
-    {
-        animator.SetInteger("flyAnim", 2);
-        audioSource.clip = applause;
-        audioSource.loop = true;
-        audioSource.pitch = 1.0f;
-        audioSource.Play();
-    }
-
-    public override void TakeDamage(int damage)//пока не нужен
-    {
-        timesBeforeLeftScreen -= damage;
-        ChangePosition();
-    }
 }
